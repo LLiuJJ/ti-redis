@@ -1,5 +1,4 @@
 #pragma once
-
 #include <grpcpp/security/credentials.h>
 
 #include <fstream>
@@ -19,18 +18,15 @@ struct ClusterConfig
 
     ClusterConfig() {}
 
-    ClusterConfig(const std::string & learner_key_, const std::string & learner_value_, const std::string & ca_path_
+    ClusterConfig(const std::string & learner_key_, const std::string & learner_value_, const std::string & ca_path_,
         const std::string & cert_path_, const std::string & key_path_)
-        : learner_key(learner_key_),
-          learner_value(learner_value_),
-          ca_path(ca_path_),
-          cert_path(cert_path_),
-          key_path(key_path_)
+        : learner_key(learner_key_), learner_value(learner_value_), ca_path(ca_path_), cert_path(cert_path_), key_path(key_path_)
     {}
 
     bool hasTlsConfig() const { return !ca_path.empty(); }
 
-    grpc::SslCredentialsOptions getGrpcCredentials() const 
+
+    grpc::SslCredentialsOptions getGrpcCredentials() const
     {
         if (hasTlsConfig())
         {
@@ -44,14 +40,12 @@ struct ClusterConfig
     }
 
 private:
-
     std::string readFile(const std::string & path) const
     {
         std::ifstream t(path.data());
-        std::string str((std::istreambuf_iterator<char>(t)))
+        std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
         return str;
     }
-
 };
 
-}
+} // namespace pingcap

@@ -5,7 +5,6 @@
 
 namespace pingcap
 {
-
 class Redact
 {
 public:
