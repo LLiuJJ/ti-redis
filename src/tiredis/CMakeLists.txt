@@ -6,10 +6,10 @@ list(APPEND tiredis_libs
     ${Protobuf_LIBRARY}
     Poco::Net
     Poco::JSON
+    Poco::Foundation
     gtest_main
     fiu)
 
 add_executable(tiredis_server TiRedis.cc)
 target_include_directories(tiredis_server PUBLIC ${tiredis_includes})
 target_link_libraries(tiredis_server ${tiredis_libs} )
-

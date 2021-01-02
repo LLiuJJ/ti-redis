@@ -2,7 +2,6 @@
 
 set -xe
 
-
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 SRCPATH=$(cd $SCRIPTPATH/..; pwd -P)
 NPROC=$(nproc || grep -c ^processor /proc/cpuinfo)
@@ -18,3 +17,10 @@ mkdir -p $build_dir && cd $build_dir
 cmake "$SRCPATH" \
     -DENABLE_TESTS=on
 make -j $NPROC
+
+if [ ! -d "$SRCPATH/output" ]; then
+  mkdir $SRCPATH/output
+  mkdir $SRCPATH/output/logs
+fi
+
+cp $build_dir/src/tiredis/tiredis_server $SRCPATH/output
