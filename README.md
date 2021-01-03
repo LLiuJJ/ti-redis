@@ -2,16 +2,20 @@
 
 #### PreRequireds
 
-1.pingcap grpc kvproto
-https://github.com/pingcap/kvproto.git (0e3ce33f29b8be60d24610eb1c4695114de367ca)
-2.googletest
+1.pingcap grpc kvproto @ 0e3ce33
+
+2.googletest @ 389cb68
+
+3.libfiu @ 20ea5e8
 
 #### Build
 
-https://pypi.org/project/mugit/
-pip install mugit
+git clone --recursive https://gitee.com/LLiuJJ/ti-redis.git
+
 mugit select main
+
 mugit pull
 
+cd ci; make build-dev
 
 #### License

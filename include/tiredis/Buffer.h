@@ -36,5 +36,3 @@ inline std::size_t RoundUp2Power(std::size_t size)
 
     return roundSize;
 }
-
-
