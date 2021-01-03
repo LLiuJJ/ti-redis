@@ -9,7 +9,6 @@
 #include <tiredis/TiKvCluster.h>
 #include <tiredis/TLogger.h>
 #include <iostream>
-#include <tiredis/ThreadPool.h>
 
 namespace pingcap
 {
@@ -37,20 +36,6 @@ public:
 }
 }
 
-void funHelloA() {
-    for (int i = 0; i < 5; i ++){
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        std::cout << "have fun from A " << i << std::endl;
-    }
-}
-
-void funHelloB() {
-    for (int i = 0; i < 5; i ++){
-        std::this_thread::sleep_for(std::chrono::seconds(2));
-        std::cout << "have fun from B " << i << std::endl;
-    }
-}
-
 int main(int ac, char* av[])
 {
     LogManager::Instance().CreateLog(logFILE, "logs/tiredis.log");
@@ -66,7 +51,5 @@ int main(int ac, char* av[])
     txn.commit();
     pingcap::kv::Snapshot snap(test_cluster.get());
     std::cout << "get a:" << snap.Get("a") << std::endl;
-    ThreadPool::Instance().ExecuteTask(funHelloA);
-    ThreadPool::Instance().ExecuteTask(funHelloB);
     return 0;
 }

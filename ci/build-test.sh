@@ -24,3 +24,5 @@ if [ ! -d "$SRCPATH/output" ]; then
 fi
 
 cp $build_dir/src/tiredis/tiredis_server $SRCPATH/output
+cp $build_dir/src/tests/buffer_test/buffer_test $SRCPATH/output
+cp $build_dir/src/tests/thread_pool_test/thread_pool_test $SRCPATH/output
