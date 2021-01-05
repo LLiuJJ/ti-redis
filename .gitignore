@@ -37,3 +37,4 @@ build/*
 # Library Source code
 ./third_party/poco
 output/*
+include/Poco/*

@@ -14,6 +14,8 @@ list(APPEND TiRedis_sources logger/TLogger.cc)
 list(APPEND TiRedis_sources threads/ThreadPool.cc)
 list(APPEND TiRedis_sources coprocessor/Client.cc)
 list(APPEND TiRedis_sources utils/RedactHelpers.cc)
+list(APPEND TiRedis_sources socket/Socket.cc)
+list(APPEND TiRedis_sources socket/Epoller.cc)
 list(APPEND TiRedis_sources buffers/UnboundedBuffer.cc)
 list(APPEND TiRedis_sources buffers/AsyncBuffer.cc)
 
