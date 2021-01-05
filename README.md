@@ -3,6 +3,10 @@
 #### PreRequireds
 
 1.pingcap grpc kvproto @ 0e3ce33
+please make sure kvproto is this version, if not
+```
+cd third_party; git reset --hard 0e3ce33
+```
 
 2.googletest @ 389cb68
 

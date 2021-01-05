@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <tiredis/UnboundedBuffer.h>
+#include <tiredis/AsyncBuffer.h>
 #include <iostream>
 #include <limits>
 
@@ -30,4 +31,14 @@ TEST(UnboundedBufferTests, UnboundedBuffer) {
         ASSERT_EQ(tmp[1], 'b');
     }
     buf.Shrink();
+}
+
+TEST(AsyncBufferTests, AsyncBuffer) {
+    AsyncBuffer asbuf;
+    asbuf.Write("hello", 5);
+    BufferSequence bf;
+    asbuf.ProcessBuffer(bf);
+    ASSERT_EQ(bf.count, 1);
+    std::string data = std::string(static_cast<char *>(bf.buffers[0].iov_base));
+    ASSERT_EQ(data, "hello");
 }

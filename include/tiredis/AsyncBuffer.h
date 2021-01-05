@@ -19,6 +19,12 @@ public:
     void  Skip(std::size_t size);
 
 private:
-    // Buffer  buffer_;
+    Buffer  buffer_;
+
+    UnboundedBuffer tmpBuf_;
+
+    std::mutex backBufLock_;
+    std::atomic<std::size_t> backBytes_;
+    UnboundedBuffer backBuf_;
 
 };

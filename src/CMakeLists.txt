@@ -15,6 +15,7 @@ list(APPEND TiRedis_sources threads/ThreadPool.cc)
 list(APPEND TiRedis_sources coprocessor/Client.cc)
 list(APPEND TiRedis_sources utils/RedactHelpers.cc)
 list(APPEND TiRedis_sources buffers/UnboundedBuffer.cc)
+list(APPEND TiRedis_sources buffers/AsyncBuffer.cc)
 
 set(tiRedis_INCLUDE_DIR ${tiRedis_SOURCE_DIR}/include)
 
