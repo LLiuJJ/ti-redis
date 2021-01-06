@@ -5,9 +5,9 @@
 #include <cstdlib>
 #include <cstring>
 #include <cassert>
-#include "Server.h"
-#include "NetThreadPool.h"
-#include "ListenSocket.h"
+#include <tiredis/Server.h>
+#include <tiredis/NetThreadPool.h>
+#include <tiredis/ListenSocket.h>
 
 namespace Internal
 {
@@ -56,6 +56,72 @@ bool ListenSocket::Bind(const SocketAddr& addr)
         return false;
     }
 
+    if (!NetThreadPool::Instance().AddSocket(shared_from_this(), EventTypeRead))
+        return false;
+    
+    return true;
+}
+
+int ListenSocket::_Accept()
+{
+    socklen_t addrLen = sizeof addrClient_;
+    return ::accept(localSock_, (struct sockaddr*)&addrClient_, &addrLen);
+}
+
+bool ListenSocket::OnReadable()
+{
+    // wait client connection comming
+    while (true)
+    {
+        int connfd = _Accept();
+        if (connfd >= 0)
+        {
+            Server::Instance()->NewConnection(connfd, tag_);
+        }
+        else
+        {
+            bool result = false;
+            switch (errno)
+            {
+            case EWOULDBLOCK:
+            case ECONNABORTED:
+            case EINTR:
+                result = true;
+                break;
+            case EMFILE:
+            case ENFILE:
+                // Log not enough file discriptor available
+                result = true;
+                break;
+            case ENOBUFS:
+                // not enough memory
+                result = true;
+
+            default:
+                break;
+            }
+            
+            return result;
+        }
+    }
+
+    return true;
+}
+
+bool ListenSocket::OnWritable()
+{
+    return false;
+}
+
+bool ListenSocket::OnError()
+{
+    if (Socket::OnError())
+    {
+        Server::Instance()->DelListenSock(localSock_);
+        return true;
+    }
+
+    return false;
 }
 
 }
