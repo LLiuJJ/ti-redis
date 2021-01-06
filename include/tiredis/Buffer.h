@@ -204,6 +204,7 @@ void CircularBuffer<BUFFER>::GetSpace(BufferSequence& buffer, std::size_t offset
     const std::size_t readPos = readPos_;
     const std::size_t writePos = (writePos_ + offset) & (maxSize_ - 1);
 
+    // writePos to buffer_ wirte addr
     buffer.buffers[bufferIndex].iov_base = &buffer_[writePos];
 
     if (readPos > writePos)

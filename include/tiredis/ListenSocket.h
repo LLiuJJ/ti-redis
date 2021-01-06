@@ -26,7 +26,6 @@ private:
     sockaddr_in addrClient_;
     unsigned short localPort_;
     const int tag_;
-
 };
 
 };

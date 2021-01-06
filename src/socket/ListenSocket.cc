@@ -1,5 +1,3 @@
-#pragma once
-
 #include <errno.h>
 #include <sys/socket.h>
 #include <cstdlib>
@@ -8,6 +6,7 @@
 #include <tiredis/Server.h>
 #include <tiredis/NetThreadPool.h>
 #include <tiredis/ListenSocket.h>
+#include <tiredis/TLogger.h>
 
 namespace Internal
 {
@@ -27,11 +26,13 @@ ListenSocket::~ListenSocket()
 
 bool ListenSocket::Bind(const SocketAddr& addr)
 {
+    LogManager::Instance().Log().information("1");
     if (addr.Empty())
         return false;
-    
-    if (localSock_ != INVALID_SOCKET)
-        return false;
+    LogManager::Instance().Log().information("2");
+
+    // if (localSock_ != INVALID_SOCKET)
+    //     return false;
 
     localPort_ = addr.GetPort();
     localSock_ = CreateTCPSocket();
@@ -41,18 +42,21 @@ bool ListenSocket::Bind(const SocketAddr& addr)
     SetRcvBuf(localSock_);
     SetSndBuf(localSock_);
 
+    LogManager::Instance().Log().information("3");
     struct sockaddr_in serv = addr.GetAddr();
 
     int ret = ::bind(localSock_, (struct sockaddr*)&serv, sizeof serv);
     if (SOCKET_ERROR == ret)
     {
         CloseSocket(localSock_);
+        LogManager::Instance().Log().information("bind error");
         return false;
     }
     ret = ::listen(localSock_, ListenSocket::LISTENQ);
     if (SOCKET_ERROR == ret)
     {
         CloseSocket(localSock_);
+        LogManager::Instance().Log().information("listen error");
         return false;
     }
 
@@ -108,7 +112,7 @@ bool ListenSocket::OnReadable()
     return true;
 }
 
-bool ListenSocket::OnWritable()
+bool ListenSocket::OnWriteable()
 {
     return false;
 }

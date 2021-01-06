@@ -80,7 +80,7 @@ public:
     void EnableRead(const std::shared_ptr<Socket>& sock);
     void EnableWrite(const std::shared_ptr<Socket>& sock);
     void DisableRead(const std::shared_ptr<Socket>& sock);
-    void DiableWrite(const std::shared_ptr<Socket>& sock);
+    void DisableWrite(const std::shared_ptr<Socket>& sock);
 
     static NetThreadPool& Instance()
     {

@@ -10,7 +10,7 @@ class Server
 {
 protected:
     virtual bool _RunLogic();
-    virtual void _Recycle() {}
+    virtual bool _Recycle() {}
     virtual bool _Init() = 0;
 
     Server();
@@ -24,7 +24,7 @@ public:
     bool TCPBind(const SocketAddr& listenAddr, int tag);
     void TCPReconnect(const SocketAddr& peer, int tag);
 
-    static Server8 Instance() { return sinstance_; }
+    static Server* Instance() { return sinstance_; }
 
     bool IsTerminate() const { return bTerminate_; }
     void Terminate() { bTerminate_ = true; }
@@ -49,12 +49,12 @@ public:
 
 private:
     virtual std::shared_ptr<StreamSocket> _OnNewConnection(int tcpsock, int tag);
-    virtual _TCPConnect(const SocketAddr& peer, const std::function<void()>* cb = nullptr, int tag = -1);
+    void _TCPConnect(const SocketAddr& peer, const std::function<void()>* cb = nullptr, int tag = -1);
 
     std::atomic<bool> bTerminate_;
     Internal::TaskManager tasks_;
     bool reloadCfg_;
     static Server* sinstance_;
     static std::set<int> slistenSocks_;
-
+    
 };
