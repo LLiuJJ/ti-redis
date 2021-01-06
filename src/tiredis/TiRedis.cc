@@ -10,6 +10,7 @@
 #include <tiredis/TLogger.h>
 #include <tiredis/TiRedis.h>
 #include <tiredis/Socket.h>
+#include <tiredis/Client.h>
 #include <iostream>
 
 namespace pingcap
@@ -48,7 +49,15 @@ TiRedis::~TiRedis()
 
 std::shared_ptr<StreamSocket> TiRedis::_OnNewConnection(int connfd, int tag)
 {
-    // new connectio comming
+    // new connection comming
+    SocketAddr peer;
+    Socket::GetPeerAddr(connfd, peer);
+
+    auto cli(std::make_shared<Client>());
+    if (!cli->Init(connfd, peer))
+        cli.reset();
+    return cli;
+    
 }
 
 bool TiRedis::_Init()

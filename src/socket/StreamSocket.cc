@@ -7,7 +7,6 @@
 #include <tiredis/Server.h>
 #include <tiredis/NetThreadPool.h>
 
-
 using std::size_t;
 
 StreamSocket::StreamSocket()
@@ -168,7 +167,7 @@ bool StreamSocket::DoMsgParse()
         auto bodyLen = _HandlePacket(af.ReadAddr(), af.ReadableSize());
         if (bodyLen > 0)
         {
-            busy == true;
+            busy = true;
             recvBuf_.AdjustReadPtr(bodyLen);
         }
         else

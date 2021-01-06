@@ -85,6 +85,7 @@ bool TaskManager::DoMsgParse()
             ++ it;
         }
     }
+    
     return busy;
 }
 

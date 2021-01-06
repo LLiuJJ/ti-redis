@@ -13,7 +13,7 @@ namespace pingcap
 namespace kv
 {
 
-using Buffer = std::map<std::string, std::string>;
+using TBuffer = std::map<std::string, std::string>;
 
 // Txn supports transaction operation for TiKV.
 // Note that this implementation is only used for TEST right now.
@@ -21,7 +21,7 @@ struct Txn
 {
     Cluster * cluster;
 
-    Buffer buffer;
+    TBuffer buffer;
 
     uint64_t start_ts;
 
