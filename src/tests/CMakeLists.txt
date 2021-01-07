@@ -11,3 +11,4 @@ list(APPEND test_libs
 
 add_subdirectory(buffer_test)
 add_subdirectory(thread_pool_test)
+add_subdirectory(tikv_test)

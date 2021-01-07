@@ -6,6 +6,7 @@
 #include <tiredis/StreamSocket.h>
 #include <tiredis/Server.h>
 #include <tiredis/NetThreadPool.h>
+#include <tiredis/TLogger.h>
 
 using std::size_t;
 
@@ -104,6 +105,8 @@ bool StreamSocket::SendPacket(UnboundedBuffer& ubf)
 bool StreamSocket::OnReadable()
 {
     int nBytes = StreamSocket::Recv();
+    LogManager::Instance().Log().information("recv %d Bytes ", nBytes);
+
     if (nBytes < 0)
     {
         // failed

@@ -53,7 +53,7 @@ template <typename BUFFER>
 class CircularBuffer
 {
 public:
-    explicit CircularBuffer(std::size_t size = 0) : maxSize_ (size),
+    explicit CircularBuffer(std::size_t size = 0) : maxSize_(size),
     readPos_(0),
     writePos_(0)
     {

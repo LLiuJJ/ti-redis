@@ -38,3 +38,4 @@ build/*
 ./third_party/poco
 output/*
 include/Poco/*
+third_party/redis-3.0-annotated
