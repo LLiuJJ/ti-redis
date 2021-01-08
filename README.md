@@ -22,4 +22,8 @@ mugit pull
 
 cd ci; make build-dev
 
+#### GitHub 
+
+https://github.com/LLiuJJ/ti-redis
+
 #### License
