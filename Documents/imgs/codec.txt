@@ -1,0 +1,9 @@
+LIST
+
+KeyObject
+
+K               V
+
+A   ->  B   ->  C   ->  D
+
+

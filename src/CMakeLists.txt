@@ -22,6 +22,7 @@ list(APPEND TiRedis_sources socket/NetThreadPool.cc)
 list(APPEND TiRedis_sources socket/Server.cc)
 list(APPEND TiRedis_sources socket/TaskManager.cc)
 list(APPEND TiRedis_sources cli/Client.cc)
+list(APPEND TiRedis_sources parser/ProtoParser.cc)
 list(APPEND TiRedis_sources buffers/UnboundedBuffer.cc)
 list(APPEND TiRedis_sources buffers/AsyncBuffer.cc)
 

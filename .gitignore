@@ -39,3 +39,4 @@ build/*
 output/*
 include/Poco/*
 third_party/redis-3.0-annotated
+third_party/TidbRS
