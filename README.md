@@ -32,6 +32,14 @@ sh scripts/pre_download.sh
 cd ci; make build-dev
 ```
 
+#### HomePage 
+
+https://ti-redis.gitee.io/ti-redis-home
+
+#### Architecture
+
+![TiRedis 架构](Documents/imgs/TiRedis%20Arch.svg)
+
 #### GitHub 
 
 https://github.com/LLiuJJ/ti-redis
