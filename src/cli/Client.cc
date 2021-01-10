@@ -28,7 +28,7 @@ PacketLength Client::_HandlePacket(const char* start, std::size_t bytes)
     const char* const end   = start + bytes;
     const char* ptr  = start;
     // deal with packet
-    LogManager::Instance().Log().information("pack size: %d", static_cast<int>(bytes));
+    // LogManager::Instance().Log().information("pack size: %d", static_cast<int>(bytes));
     auto parseRet = parser_.ParseRequest(start, end);
     if (parseRet != ParseResult::ok)
     {
@@ -39,11 +39,11 @@ PacketLength Client::_HandlePacket(const char* start, std::size_t bytes)
         return static_cast<PacketLength>(ptr - start);
 
     std::string cmd(params[0]);
-    LogManager::Instance().Log().information("cmd: %s", cmd);
-    for (auto it = params.begin(); it != params.end(); it ++)
-    {
-        LogManager::Instance().Log().information("param: %s", *it);
-    }
+    // LogManager::Instance().Log().information("cmd: %s", cmd);
+    // for (auto it = params.begin(); it != params.end(); it ++)
+    // {
+        // LogManager::Instance().Log().information("param: %s", *it);
+    // }
     if(cmd == "set")
     {
         /* code */
