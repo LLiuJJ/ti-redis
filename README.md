@@ -24,12 +24,13 @@
 ```
 
 #### Build
-
-git clone --recursive https://gitee.com/LLiuJJ/ti-redis.git
+```
+git clone --recursive https://gitee.com/LLiuJJ/ti-redis.git; cd ti-redis
 
 sh scripts/pre_download.sh
 
 cd ci; make build-dev
+```
 
 #### GitHub 
 
